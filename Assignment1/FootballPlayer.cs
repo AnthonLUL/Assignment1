@@ -7,7 +7,7 @@ namespace Assignment1
     public class FootballPlayer 
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public int Age { get; set; }
         public int ShirtNumber { get; set; }
 
@@ -15,44 +15,34 @@ namespace Assignment1
         {
 
         }
-        public string TestNameConstraint(string Name)
+        public void ValidateName()
         {
-            int NameLength = Name.Length;
-
-            if (NameLength >= 2 && Name.All(Char.IsLetter))
-            {
-                return Name;
-            }
-            else
-            {
+            if (Name == null)
+                throw new ArgumentNullException("A name is required");
+            if (Name.Length <= 2)
                 throw new ArgumentException("Name must contain 2 or more letters");
-            }
         }
 
-        public int TestAgeConstraints(int age, int obj)
+        public void ValidateAge()
         {
-            if (age > 1)
-            {
-                return age;
-            }
-            else
-            {
+            if (Age < 2)
                 throw new ArgumentException("Sorry Mate you have to  be at least 2 years to play :(");
-            }
+            
 
         }
 
-        public int TestShirtNumber(int shirtNum)
+        public void ValidateShirtNum()
         {
-            if (shirtNum >= 1 && shirtNum <= 99)
-            {
-                return shirtNum;
-            }
-            else
-            {
+            if (ShirtNumber < 2 || ShirtNumber > 99)
                 throw new ArgumentException("The shirtnumber has to be between 1 and 99");
-            }
 
+        }
+
+        public void Validate()
+        {
+            ValidateName();
+            ValidateAge();
+            ValidateShirtNum();
         }
 
 
